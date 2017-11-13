@@ -1,12 +1,19 @@
 # -*- coding: utf-8 -*-
+'''
+Mdmail
+------
+Mdmail sends emails written in Markdown. It could be used as a standalone command-line script or as a python module. The features includes
 
-# Learn more: https://github.com/kennethreitz/setup.py
+- Have a sane default CSS style and support CSS customization
+- Support local images as inline images
+
+Links
+`````
+* `User Guide and Source Code on Github <https://github.com/yejianye/mdmail>`_
+'''
 
 from setuptools import setup
 
-
-with open('README.md') as f:
-    readme = f.read()
 
 with open('LICENSE') as f:
     license = f.read()
@@ -22,9 +29,9 @@ install_requires = [
 
 setup(
     name='mdmail',
-    version='0.1.0',
+    version='0.1.1',
     description='Send email written in Markdown',
-    long_description=readme,
+    long_description=__doc__,
     keywords=['markdown', 'html', 'email', 'inline css'],
     author='Jianye Ye',
     author_email='yejianye@gmail.com',

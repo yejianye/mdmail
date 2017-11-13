@@ -130,23 +130,20 @@ mdmail.send(content, subject='Sample Email',
             smtp=smtp)
 ```
 
-Full API documentation of `mdmail.send`
 
-```
-Arguments:
+### API documentation `mdmail.send` 
 
-email (str/obj): A markdown string or EmailContent object 
-subject (str): subject line
-from_email (str): sender email address
-to_email (str/list): recipient email addresses
-cc (str/list): CC email addresses (string or a list)
-bcc (str/list): BCC email addresses (string or a list)
-reply_to (str): Reply-to email address
-smtp (dict): SMTP configuration with following keys
-              host (str): SMTP server host. Default: localhost
-              port (int): SMTP server port. Default: 25
-              tls (bool): Use TLS. Default: False
-              ssl (bool): Use SSL. Default: False
-              user (bool): SMTP login user. Default empty
-              password (bool): SMTP login password. Default empty
-```
+- **email** (str/obj): A markdown string or EmailContent object 
+- **subject** (str): subject line
+- **from_email** (str): sender email address
+- **to_email** (str/list): recipient email addresses
+- **cc** (str/list): CC email addresses (string or a list)
+- **bcc** (str/list): BCC email addresses (string or a list)
+- **reply_to** (str): Reply-to email address
+- **smtp** (dict): SMTP configuration with following keys
+    - *host* (str): SMTP server host. Default: localhost
+    - *port* (int): SMTP server port. Default: 25
+    - *tls* (bool): Use TLS. Default: False
+    - *ssl* (bool): Use SSL. Default: False
+    - *user* (bool): SMTP login user. Default empty
+    - *password* (bool): SMTP login password. Default empty
