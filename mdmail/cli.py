@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""
+"""Send email written in Markdown.
 """
 from __future__ import print_function
 

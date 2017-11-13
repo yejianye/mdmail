@@ -64,6 +64,33 @@ export MDMAIL_PASSWORD="" # default: None
 export MDMAIL_DEFAULT_SENDER="" # default: None
 ```
 
+Full help of `mdmail` command-line script
+
+```bash
+usage: mdmail [-h] [--subject SUBJECT] [--from FROM_] [--to TO] [--cc CC]
+              [--bcc BCC] [--reply-to REPLY_TO] [--css CSS] [--print-only]
+              [file]
+
+Send email written in Markdown.
+
+positional arguments:
+  file                  Markdown file for email content. Default to STDIN.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --subject SUBJECT, -s SUBJECT
+                        Subject line
+  --from FROM, -f FROM
+                        From address
+  --to TO, -t TO        To address
+  --cc CC, -c CC        CC address
+  --bcc BCC, -b BCC     Bcc address
+  --reply-to REPLY_TO, -r REPLY_TO
+                        Reply-to address
+  --css CSS             Use a custom CSS file
+  --print-only, -p      Only print out rendered html
+```
+
 Send Email in Python Code
 --------------------------
 
@@ -101,4 +128,33 @@ smtp = {
 mdmail.send(content, subject='Sample Email',
             from_email='foo@example.com', to_email='bar@example.com',
             smtp=smtp)
+```
+
+Full API documentation of `mdmail.send`
+
+```python
+def send(email, subject=None,
+         from_email=None, to_email=None,
+         cc=None, bcc=None, reply_to=None,
+         smtp=None):
+    """Send markdown email
+
+    Args:
+        email (str/obj): A markdown string or EmailContent object 
+        subject (str): subject line
+        from_email (str): sender email address
+        to_email (str/list): recipient email addresses
+        cc (str/list): CC email addresses (string or a list)
+        bcc (str/list): BCC email addresses (string or a list)
+        reply_to (str): Reply-to email address
+        smtp (dict): SMTP configuration (dict)
+
+    Schema of smtp dict:
+        host (str): SMTP server host. Default: localhost
+        port (int): SMTP server port. Default: 25
+        tls (bool): Use TLS. Default: False
+        ssl (bool): Use SSL. Default: False
+        user (bool): SMTP login user. Default empty
+        password (bool): SMTP login password. Default empty
+    """
 ```

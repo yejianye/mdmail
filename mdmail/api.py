@@ -12,6 +12,26 @@ def send(email, subject=None,
          from_email=None, to_email=None,
          cc=None, bcc=None, reply_to=None,
          smtp=None):
+    """Send markdown email
+
+    Args:
+        email (str/obj): A markdown string or EmailContent object 
+        subject (str): subject line
+        from_email (str): sender email address
+        to_email (str/list): recipient email addresses
+        cc (str/list): CC email addresses (string or a list)
+        bcc (str/list): BCC email addresses (string or a list)
+        reply_to (str): Reply-to email address
+        smtp (dict): SMTP configuration (dict)
+
+    Schema of smtp dict:
+        host (str): SMTP server host. Default: localhost
+        port (int): SMTP server port. Default: 25
+        tls (bool): Use TLS. Default: False
+        ssl (bool): Use SSL. Default: False
+        user (bool): SMTP login user. Default empty
+        password (bool): SMTP login password. Default empty
+    """
     if is_string(email):
         email = EmailContent(email)
 
@@ -44,6 +64,13 @@ def send(email, subject=None,
 
 class EmailContent(object):
     def __init__(self, content, css=None, image_root='.'):
+        """ Constructor
+
+        Args:
+            content (str): Markdown text
+            css (str): Custom CSS style. If not set, use default CSS style.
+            image_root (str): Root directory for inline images.
+        """
         self._md = markdown.Markdown(extensions=[
             'markdown.extensions.tables',
             'markdown.extensions.meta'])
