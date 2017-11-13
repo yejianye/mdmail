@@ -1,1 +1,1 @@
-from api import EmailContent, send
+from .api import EmailContent, send

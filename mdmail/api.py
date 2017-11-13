@@ -1,11 +1,12 @@
 import os
 import hashlib
+from io import open
 
 import emails
 import markdown
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
-from .helpers import sanitize_email_address
+from mdmail.helpers import sanitize_email_address
 
 def send(email, subject=None,
          from_email=None, to_email=None,
@@ -33,6 +34,7 @@ def send(email, subject=None,
         message_args['bcc'] = bcc
     if reply_to:
         message_args['headers'] = {'reply-to': reply_to}
+
     message = emails.Message(**message_args)
 
     for filename, data in email.inline_images:
@@ -42,7 +44,7 @@ def send(email, subject=None,
 
 class EmailContent(object):
     def __init__(self, content, css=None, image_root='.'):
-        self._md = markdown.Markdown(extentions=[
+        self._md = markdown.Markdown(extensions=[
             'markdown.extensions.tables',
             'markdown.extensions.meta'])
         self._html = None
@@ -50,14 +52,14 @@ class EmailContent(object):
         self._convert(content, css, image_root)
 
     def _replace_inline_images(self, html, image_root):
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html, "lxml")
         imgs = soup.findAll('img')
         inlines = {}
         for img in imgs:
             src = img['src']
             if not src.startswith('http'):
                 src_uid = '{}_{}'.format(
-                    hashlib.md5(src).hexdigest()[:6],
+                    hashlib.md5(src.encode('utf-8')).hexdigest()[:6],
                     os.path.basename(src))
                 if src_uid not in inlines:
                     img_path = os.path.join(image_root, src)
@@ -67,10 +69,10 @@ class EmailContent(object):
         return soup
 
     def _inline_css(self, html, css):
-        default_css = os.path.join(os.path.dirname(__file__), 'default.css')
         if not css:
-            css = open(default_css).read()
-        email_html_template = """
+            default_css = os.path.join(os.path.dirname(__file__), 'default.css')
+            css = open(default_css, encoding='utf-8').read()
+        email_html_template = u"""
         <!doctype html>
         <html>
             <head>
@@ -88,7 +90,8 @@ class EmailContent(object):
     def _convert(self, content, css, image_root):
         raw_html = self._md.convert(content)
         html = self._replace_inline_images(raw_html, image_root)
-        self._html = self._inline_css(html, css)
+        html = self._inline_css(html, css)
+        self._html = BeautifulSoup(html, "lxml").prettify()
 
     @property
     def html(self):
@@ -96,7 +99,7 @@ class EmailContent(object):
 
     @property
     def text(self):
-        return '\n'.join(self._md.lines)
+        return u'\n'.join(self._md.lines)
 
     @property
     def headers(self):

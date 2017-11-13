@@ -1,0 +1,6 @@
+markdown
+premailer
+emails
+lxml
+beautifulsoup4
+nose

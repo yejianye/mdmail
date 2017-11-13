@@ -55,13 +55,13 @@ $ echo '# Sample Email' | mdmail --from=foo@xyz.com --to=bar@xyz.com --subject='
 SMTP server configurations are read from the following environment variables
 
 ```bash
-export MDMAIL_SERVER="" # default: localhost
+export MDMAIL_HOST="" # default: localhost
 export MDMAIL_PORT="" # default: 25
 export MDMAIL_USE_TLS="" # default: false
 export MDMAIL_USE_SSL="" # default: false
 export MDMAIL_USERNAME="" # default: None
 export MDMAIL_PASSWORD="" # default: None
-export MDMAIL_DEFAULT_SENDER="" # Email address to send from
+export MDMAIL_DEFAULT_SENDER="" # default: None
 ```
 
 Send Email in Python Code
@@ -81,23 +81,24 @@ email="""
 ![Embed local image](../assets/image.jpg)
 """
 
-mdmail.send(from_email='foo@example.com', to_email='bar@example.com',
-            content=email)
+mdmail.send(email, subject='Sample Email',
+            from_email='foo@example.com', to_email='bar@example.com')
 ```
             
 By default, it will use SMTP server on localhost. You could specify a SMTP server as well.
 
 ```
 # Specify SMTP server
-smtp_server = {
-  'address': 'my-mailserver.com',
-  'port': '25',
-  'use_tls': False,
-  'use_ssl': False,
-  'username': '',
+smtp = {
+  'host: 'my-mailserver.com',
+  'port': 25,
+  'tls': False,
+  'ssl': False,
+  'user: '',
   'password': '',
 }
 
-mail_server = mdmail.MailServer(**smtp_server)
-mail_server.send(...)
+mdmail.send(content, subject='Sample Email',
+            from_email='foo@example.com', to_email='bar@example.com',
+            smtp=smtp)
 ```

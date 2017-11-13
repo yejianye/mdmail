@@ -6,6 +6,7 @@ from __future__ import print_function
 import os
 import sys
 from argparse import ArgumentParser, RawTextHelpFormatter
+from io import open
 
 from mdmail.api import send, EmailContent
 from mdmail.helpers import to_bool
@@ -13,26 +14,39 @@ from mdmail.helpers import to_bool
 def main():
     parser = ArgumentParser(description=__doc__,
                             formatter_class=RawTextHelpFormatter)
-    parser.add_argument("file", nargs='?',
+    parser.add_argument("file", nargs="?",
                         help="Markdown file for email content. " \
                         "Default to STDIN.")
-    parser.add_argument("--subject", help="Subject line")
-    parser.add_argument("--from", help="From address")
-    parser.add_argument("--to", help="To address")
-    parser.add_argument("--cc", help="CC address")
-    parser.add_argument("--bcc", help="Bcc address")
-    parser.add_argument("--reply-to", help="Reply-to address")
+    parser.add_argument("--subject", "-s", help="Subject line")
+    parser.add_argument("--from", "-f", dest='from_', help="From address")
+    parser.add_argument("--to", "-t", help="To address")
+    parser.add_argument("--cc", "-c", help="CC address")
+    parser.add_argument("--bcc", "-b", help="Bcc address")
+    parser.add_argument("--reply-to", "-r", help="Reply-to address")
+    parser.add_argument("--css", help="Use a custom CSS file")
+    parser.add_argument("--print-only", "-p", action='store_true',
+                        help="Only print out rendered html")
     args = parser.parse_args()
 
-    if not args.file:
-        content = sys.stdin.read()
-    elif os.path.exists(args.file):
-        content = open(args.file).read()
+    if args.file:
+        content = open(args.file, encoding='utf-8').read()
+        image_root = os.path.dirname(args.file)
     else:
-        print("No such file: {}".format(args.file))
-        sys.exit(1)
+        content = sys.stdin.read()
+        image_root = os.getcwd()
 
-    email_content = EmailContent(content)
+    if args.css:
+        css = open(args.css, encoding='utf-8').read()
+    else:
+        css = None
+
+    email_content = EmailContent(content, css=css, image_root=image_root)
+
+    if not args.from_:
+        from_email = email_content.headers.get('from') or \
+                     os.environ.get('MDMAIL_DEFAULT_SENDER')
+    else:
+        from_email = args.from_
 
     smtp = {
         'host': os.environ.get('MDMAIL_HOST', 'localhost'),
@@ -43,10 +57,16 @@ def main():
         'password': os.environ.get('MDMAIL_PASSWORD',''),
     }
 
-    send(email_content, subject=args.subject,
-         from_email=args.from, to_email=args.to,
-         cc=args.cc, bcc=args.bcc, reply_to=args.reply_to,
-         smtp=smtp)
+    if args.print_only:
+        print("==========HTML Content===========")
+        print(email_content.html + '\n')
+        print("==========Plain-text Content===========")
+        print(email_content.text + '\n')
+    else:
+        send(email_content, subject=args.subject,
+            from_email=from_email, to_email=args.to,
+            cc=args.cc, bcc=args.bcc, reply_to=args.reply_to,
+            smtp=smtp)
 
 if __name__ == '__main__':
     main()

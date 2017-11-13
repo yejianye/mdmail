@@ -1,6 +1,9 @@
 import re
 
 def sanitize_email_address(address):
+    if address is None:
+        return None
+
     if isinstance(address, (list, tuple)):
         return [sanitize_email_address(a) for a in address]
 
