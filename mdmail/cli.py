@@ -8,10 +8,10 @@ import sys
 from argparse import ArgumentParser, RawTextHelpFormatter
 from io import open
 
-from mdmail.api import send, EmailContent
+import mdmail
 from mdmail.helpers import to_bool
 
-def main():
+def main(cli_args=None):
     parser = ArgumentParser(description=__doc__,
                             formatter_class=RawTextHelpFormatter)
     parser.add_argument("file", nargs="?",
@@ -26,7 +26,10 @@ def main():
     parser.add_argument("--css", help="Use a custom CSS file")
     parser.add_argument("--print-only", "-p", action='store_true',
                         help="Only print out rendered html")
-    args = parser.parse_args()
+    if cli_args:
+        args = parser.parse_args(cli_args)
+    else:
+        args = parser.parse_args()
 
     if args.file:
         content = open(args.file, encoding='utf-8').read()
@@ -40,7 +43,7 @@ def main():
     else:
         css = None
 
-    email_content = EmailContent(content, css=css, image_root=image_root)
+    email_content = mdmail.EmailContent(content, css=css, image_root=image_root)
 
     if not args.from_:
         from_email = email_content.headers.get('from') or \
@@ -63,7 +66,7 @@ def main():
         print("==========Plain-text Content===========")
         print(email_content.text + '\n')
     else:
-        send(email_content, subject=args.subject,
+        mdmail.send(email_content, subject=args.subject,
             from_email=from_email, to_email=args.to,
             cc=args.cc, bcc=args.bcc, reply_to=args.reply_to,
             smtp=smtp)
