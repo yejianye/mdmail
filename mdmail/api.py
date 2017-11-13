@@ -6,19 +6,19 @@ import emails
 import markdown
 from bs4 import BeautifulSoup
 
-from mdmail.helpers import sanitize_email_address
+from mdmail.helpers import sanitize_email_address, is_string
 
 def send(email, subject=None,
          from_email=None, to_email=None,
          cc=None, bcc=None, reply_to=None,
          smtp=None):
-    if isinstance(email, basestring):
+    if is_string(email):
         email = EmailContent(email)
 
     from_email = sanitize_email_address(from_email or email.headers.get('from'))
     to_email = sanitize_email_address(to_email or email.headers.get('to'))
     cc = sanitize_email_address(cc or email.headers.get('cc'))
-    bcc = sanitize_email_address(cc or email.headers.get('bcc'))
+    bcc = sanitize_email_address(bcc or email.headers.get('bcc'))
     reply_to = sanitize_email_address(reply_to or email.headers.get('reply-to'))
 
     message_args = {
@@ -103,7 +103,7 @@ class EmailContent(object):
 
     @property
     def headers(self):
-        return {k.lower(): v for k,v in self._md.Meta.items()}
+        return {k.lower(): (v[0] if len(v) == 1 else v) for k,v in self._md.Meta.items()}
 
     @property
     def inline_images(self):

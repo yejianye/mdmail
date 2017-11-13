@@ -16,7 +16,8 @@ install_requires = [
     'premailer',
     'emails',
     'beautifulsoup4',
-    'lxml'
+    'lxml',
+    'six'
 ]
 
 setup(
