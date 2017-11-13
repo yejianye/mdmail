@@ -1,5 +1,6 @@
 init:
-	pip install -r requirements.txt
+	@pip install -r requirements.txt
 
 test:
-	nosetests tests
+	@rm -f .coverage
+	@./run_tests.sh
