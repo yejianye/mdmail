@@ -1,6 +1,9 @@
 Mdmail: Send emails written in Markdown
 =======================================
 
+[![Build Status](https://travis-ci.org/yejianye/mdmail.svg?branch=master)](https://travis-ci.org/yejianye/mdmail)
+[![Coverage Status](https://coveralls.io/repos/github/yejianye/mdmail/badge.svg)](https://coveralls.io/github/yejianye/mdmail)
+
 Mdmail sends emails written in Markdown. It could be used as a standalone command-line script or as a python module. The features includes
 
 - Have a sane default CSS style and support CSS customization
