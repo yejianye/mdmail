@@ -11,7 +11,7 @@ Mdmail sends emails written in Markdown. It could be used as a standalone comman
 
 Screenshot of an email sent via mdmail viewed in Google Inbox
 
-<img src="screenshot.png" style="height:640px"></img>
+<img src="screenshot.png" height="640"></img>
 
 To install mdmail
 
