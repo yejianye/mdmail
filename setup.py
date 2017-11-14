@@ -29,7 +29,7 @@ install_requires = [
 
 setup(
     name='mdmail',
-    version='0.1.1',
+    version='0.1.2',
     description='Send email written in Markdown',
     long_description=__doc__,
     keywords=['markdown', 'html', 'email', 'inline css'],
