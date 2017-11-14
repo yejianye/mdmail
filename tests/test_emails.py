@@ -27,9 +27,6 @@ def validate_email_content(email_file, html=None, text=None):
 def test_basic():
     validate_email_content('basic.md', html='basic.html', text='basic.txt')
 
-def test_inline_image():
-    validate_email_content('inline_image.md', html='inline_image.html')
-
 def test_unicode():
     validate_email_content('unicode.md', html='unicode.html', text='unicode.txt')
 

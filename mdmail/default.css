@@ -1,0 +1,63 @@
+body {
+    color: #24292e;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+h1, h2 {
+    border-bottom: 1px solid #eaecef;
+}
+
+a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    border-style: none; 
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+thead {
+    background-color: #eee;
+}
+
+tr {
+    border-top: 1px solid #c6cbd1;
+}
+
+pre {
+    padding: 16px;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+}
+
+code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 85%;
+    margin: 0;
+    padding: 0.2em 0;
+    border-radius: 3px;
+    background-color: #f6f8fa;
+}
+
+blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+}

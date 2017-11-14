@@ -1,8 +1,71 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
  <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8"/>
   <style>
+   body {
+    color: #24292e;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+h1, h2 {
+    border-bottom: 1px solid #eaecef;
+}
+
+a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    border-style: none; 
+}
+
+table {
+    border-spacing: 0;
+    border-collapse:collapse;
+}
+
+th, td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+thead {
+    background-color: #eee;
+}
+
+tr {
+    border-top: 1px solid #c6cbd1;
+}
+
+pre {
+    padding: 16px;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+}
+
+code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 85%;
+    margin: 0;
+    padding: 0.2em 0;
+    border-radius: 3px;
+    background-color: #f6f8fa;
+}
+
+blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+}
   </style>
  </head>
  <body>
@@ -13,46 +76,122 @@
    Paragraph
   </h2>
   <p>
-   Quick fox jumps over the lazy dog
+   <em>
+    Quick fox
+   </em>
+   jumps over the
+   <strong>
+    lazy dog
+   </strong>
   </p>
   <h2>
-   List
+   Lists
   </h2>
   <ul>
    <li>
-    List item 1
+    First item
    </li>
    <li>
-    List item 2
+    Second item
    </li>
    <li>
-    List item 3
+    Third item
    </li>
   </ul>
   <h2>
-   Table
+   Links
   </h2>
+  <p>
+   <a href="https://github.com/yejianye/mdmail">
+    Mdmail on Github
+   </a>
+  </p>
+  <h2>
+   Code
+  </h2>
+  <p>
+   Syntax hightlighting is not supported yet.
+  </p>
+  <p>
+   Code Block
+  </p>
+  <pre><code>def echo(word):
+    print(word)
+</code></pre>
+  <p>
+   Inline
+   <code>
+    code
+   </code>
+   is supported.
+  </p>
+  <h2>
+   Tables
+  </h2>
+  <p>
+   This table is from
+   <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">
+    Markdown Cheatcheet by Adam
+   </a>
+  </p>
   <table>
    <thead>
     <tr>
      <th>
-      col1
+      Tables
      </th>
-     <th>
-      col2
+     <th align="center">
+      Are
+     </th>
+     <th align="right">
+      Cool
      </th>
     </tr>
    </thead>
    <tbody>
     <tr>
      <td>
-      foo
+      col 3 is
      </td>
+     <td align="center">
+      right-aligned
+     </td>
+     <td align="right">
+      $1600
+     </td>
+    </tr>
+    <tr>
      <td>
-      bar
+      col 2 is
+     </td>
+     <td align="center">
+      centered
+     </td>
+     <td align="right">
+      $12
+     </td>
+    </tr>
+    <tr>
+     <td>
+      zebra stripes
+     </td>
+     <td align="center">
+      are neat
+     </td>
+     <td align="right">
+      $1
      </td>
     </tr>
    </tbody>
   </table>
+  <h1>
+   Inline Images
+  </h1>
+  <p>
+   Using local images is supported. Path specified in Markdown should be either absolute path or path relative to the location of Markdown file.
+  </p>
+  <p>
+   <img alt="Markdown Icon" src="cid:2d62de_markdown.png"/>
+  </p>
  </body>
 </html>
