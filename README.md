@@ -150,3 +150,20 @@ mdmail.send(content, subject='Sample Email',
     - *ssl* (bool): Use SSL. Default: False
     - *user* (bool): SMTP login user. Default empty
     - *password* (bool): SMTP login password. Default empty
+
+Using mdmail with Vim and Emacs
+-------------------------------
+
+Since `mdmail` can read from stdin and support email headers such as subject/from/to in the markdown file itself, integrating mdmail with Vim, Emacs or other text editors is easy.
+
+To use mdmail in Vim, just write a markdown email with headers, and then execute `w !mdmail` command, which will send current buffer as stdin to mdmail.
+
+In Emacs, you could write a small function to do the same thing
+
+```lisp
+(defun mdmail-send-buffer ()
+  (interactive)
+  (shell-command-on-region (point-min) (point-max) "mdmail"))
+```
+
+Then `M-x mdmail-send-buffer` will send current buffer to mdmail.
