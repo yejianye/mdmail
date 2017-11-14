@@ -85,9 +85,9 @@ optional arguments:
                         Subject line
   --from FROM, -f FROM
                         From address
-  --to TO, -t TO        To address
-  --cc CC, -c CC        CC address
-  --bcc BCC, -b BCC     Bcc address
+  --to TO, -t TO        To addresses, separated by comma
+  --cc CC, -c CC        CC address, separated by comma
+  --bcc BCC, -b BCC     Bcc address, separated by comma
   --reply-to REPLY_TO, -r REPLY_TO
                         Reply-to address
   --css CSS             Use a custom CSS file
@@ -151,7 +151,7 @@ mdmail.send(content, subject='Sample Email',
     - *user* (bool): SMTP login user. Default empty
     - *password* (bool): SMTP login password. Default empty
 
-Using mdmail with Vim and Emacs
+Use mdmail with Vim and Emacs
 -------------------------------
 
 Since `mdmail` can read from stdin and support email headers such as subject/from/to in the markdown file itself, integrating mdmail with Vim, Emacs or other text editors is easy.

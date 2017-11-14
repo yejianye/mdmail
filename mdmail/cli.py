@@ -19,9 +19,9 @@ def main(cli_args=None):
                         "Default to STDIN.")
     parser.add_argument("--subject", "-s", help="Subject line")
     parser.add_argument("--from", "-f", dest='from_', help="From address")
-    parser.add_argument("--to", "-t", help="To address")
-    parser.add_argument("--cc", "-c", help="CC address")
-    parser.add_argument("--bcc", "-b", help="Bcc address")
+    parser.add_argument("--to", "-t", help="To addresses, separated by comma")
+    parser.add_argument("--cc", "-c", help="CC addresses, separated by comma")
+    parser.add_argument("--bcc", "-b", help="Bcc address, separated by comma")
     parser.add_argument("--reply-to", "-r", help="Reply-to address")
     parser.add_argument("--css", help="Use a custom CSS file")
     parser.add_argument("--print-only", "-p", action='store_true',
