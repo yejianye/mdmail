@@ -9,6 +9,10 @@ Mdmail sends emails written in Markdown. It could be used as a standalone comman
 - Have a sane default CSS style and support CSS customization
 - Support local images as inline images
 
+Screenshot of an email sent via mdmail viewed in Google Inbox
+
+![](screenshot.png)
+
 To install mdmail
 
 ```bash
