@@ -29,7 +29,7 @@ install_requires = [
 
 setup(
     name='mdmail',
-    version='0.1.2',
+    version='0.1.3',
     description='Send email written in Markdown',
     long_description=__doc__,
     keywords=['markdown', 'html', 'email', 'inline css'],
@@ -63,6 +63,9 @@ setup(
             ]
     },
     packages=['mdmail'],
+    package_data={
+        'mdmail': ['*.css'],
+        },
     tests_require=['nose', 'mock'],
     install_requires=install_requires,
 )
