@@ -5,12 +5,15 @@ python:
   - 3.3
   - 3.4
   - 3.5
+  - 3.6
+  - 3.7
+  - 3.8
 
 install:
   - travis_retry pip install -r requirements.txt
   - travis_retry pip install coveralls
 
-script: make test
+script: PYTHONWARNINGS=always make test
 
 branches:
   only:
