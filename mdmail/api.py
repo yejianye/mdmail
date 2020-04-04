@@ -98,7 +98,8 @@ class EmailContent(object):
     def _inline_css(self, html, css):
         if not css:
             default_css = os.path.join(os.path.dirname(__file__), 'default.css')
-            css = open(default_css, encoding='utf-8').read()
+            with open(default_css, encoding='utf-8') as f:
+                css = f.read()
         email_html_template = u"""
         <!doctype html>
         <html>
